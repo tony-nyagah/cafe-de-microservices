@@ -82,7 +82,8 @@ async def chat(request: ChatRequest):
     )
 
     # Extract the AI's reply from the response
-    reply = ai_response.choices[0].message.content
+    message = ai_response.choices[0].message
+    reply = message.content if message else "Sorry, I couldn't generate a response."
 
     return {"reply": reply}
 
