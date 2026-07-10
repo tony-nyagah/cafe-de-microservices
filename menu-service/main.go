@@ -16,7 +16,6 @@ type MenuItem struct {
 	Description string  `json:"description"`
 	Category    string  `json:"category" binding:"required"`
 	Price       float64 `json:"price" binding:"required"`
-	Available   *bool   `json:"available" gorm:"default:false"`
 }
 
 // db is the global database connection used by all handlers
@@ -41,12 +40,11 @@ func seedDB() {
 
 	// Only seed if the table is empty
 	if count == 0 {
-		available := true
 		items := []MenuItem{
-			{Name: "Espresso", Description: "Rich and bold single shot", Category: "Drinks", Price: 3.50, Available: &available},
-			{Name: "Cappuccino", Description: "Espresso with steamed milk foam", Category: "Drinks", Price: 4.50, Available: &available},
-			{Name: "Croissant", Description: "Buttery, flaky pastry", Category: "Pastries", Price: 3.00, Available: &available},
-			{Name: "Blueberry Muffin", Description: "Freshly baked with real blueberries", Category: "Pastries", Price: 3.75, Available: &available},
+			{Name: "Espresso", Description: "Rich and bold single shot", Category: "Drinks", Price: 3.50},
+			{Name: "Cappuccino", Description: "Espresso with steamed milk foam", Category: "Drinks", Price: 4.50},
+			{Name: "Croissant", Description: "Buttery, flaky pastry", Category: "Pastries", Price: 3.00},
+			{Name: "Blueberry Muffin", Description: "Freshly baked with real blueberries", Category: "Pastries", Price: 3.75},
 		}
 		db.Create(&items)
 		log.Println("Database seeded with sample menu items")

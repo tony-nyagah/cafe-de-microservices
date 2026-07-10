@@ -1,27 +1,36 @@
-# Café de Microservices
+# The Good Café
 
-A café ordering app built with three microservices and a Vue frontend.
+A café ordering app built with two microservices and a Vue frontend.
 
 ## Architecture
 
 ```
-menu-service (Go/Gin + SQLite) ──► :8080
-ai-service (Python/FastAPI + Mistral) ──► :8000
-frontend (Vue 3 + daisyUI + Tailwind CSS) ──► :5173
+menu-service (Go + SQLite) ──── :8080
+ai-service (Python/FastAPI + Mistral) ──── :8001
+frontend (Vue 3 + daisyUI + Tailwind CSS) ──── :80
 ```
 
 - **Menu Service** — CRUD API for menu items (Go, Gin, GORM, SQLite)
-- **AI Service** — Chat endpoint that fetches the live menu from the menu service and uses it as context for Mistral AI responses (Python, FastAPI)
+- **AI Service** — Chat endpoint that fetches the live menu and uses it as context for Mistral AI responses (Python, FastAPI)
 - **Frontend** — Vue 3 SPA with daisyUI components and Tailwind CSS
 
-## Prerequisites
+## Quick Start (Docker)
+
+```sh
+cp .env.example .env
+# edit .env with your Mistral API key
+docker compose up --build
+# → http://localhost
+```
+
+## Local Dev
+
+### Prerequisites
 
 - [Go 1.22+](https://go.dev/dl/)
 - [Python 3.13+](https://www.python.org/downloads/) + [uv](https://docs.astral.sh/uv/)
-- [Bun](https://bun.sh/) (or Node 22+)
+- [Bun](https://bun.sh/)
 - A [Mistral API key](https://console.mistral.ai/)
-
-## Run
 
 ### Menu Service
 
@@ -37,10 +46,8 @@ go run main.go
 cd ai-service
 export MISTRAL_API_KEY=your-key-here
 uv run fastapi dev main.py
-# → running on :8000
+# → running on :8001
 ```
-
-Set `MENU_SERVICE_URL` if the menu service isn't on localhost:8080.
 
 ### Frontend
 
