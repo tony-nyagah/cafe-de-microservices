@@ -1,3 +1,6 @@
+@import "@fontsource/outfit";
+@import "@fontsource/work-sans";
+
 *,
 *::before,
 *::after {
@@ -7,10 +10,10 @@
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
   line-height: 1.6;
   font-family:
-    Inter,
+    "Work Sans",
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
@@ -22,8 +25,23 @@ body {
     "Droid Sans",
     "Helvetica Neue",
     sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family:
+    "Outfit",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }

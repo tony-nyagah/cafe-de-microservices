@@ -13,7 +13,7 @@ services:
     ports:
       - "8001:8001"
     environment:
-      - MISTRAL_API_KEY=UZr9iiaIZdYFF1tnyX7mR3oJVriMdCo7
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY}
       - MENU_SERVICE_URL=http://menu-service:8080
     depends_on:
       - menu-service

@@ -41,10 +41,30 @@ func seedDB() {
 	// Only seed if the table is empty
 	if count == 0 {
 		items := []MenuItem{
+			// Drinks - Coffee
 			{Name: "Espresso", Description: "Rich and bold single shot", Category: "Drinks", Price: 3.50},
-			{Name: "Cappuccino", Description: "Espresso with steamed milk foam", Category: "Drinks", Price: 4.50},
-			{Name: "Croissant", Description: "Buttery, flaky pastry", Category: "Pastries", Price: 3.00},
-			{Name: "Blueberry Muffin", Description: "Freshly baked with real blueberries", Category: "Pastries", Price: 3.75},
+			{Name: "Flat White", Description: "Velvety microfoam over a double ristretto", Category: "Drinks", Price: 4.50},
+			{Name: "Cappuccino", Description: "Espresso with steamed milk and a crown of foam", Category: "Drinks", Price: 4.50},
+			{Name: "Latte", Description: "Smooth espresso with silky steamed milk", Category: "Drinks", Price: 4.75},
+			{Name: "Mocha", Description: "Espresso, steamed milk, and rich chocolate", Category: "Drinks", Price: 5.25},
+			{Name: "Cold Brew", Description: "Slow-steeped for 18 hours, smooth and naturally sweet", Category: "Drinks", Price: 4.25},
+			{Name: "Americano", Description: "Espresso lengthened with hot water", Category: "Drinks", Price: 3.75},
+			// Drinks - Tea & Other
+			{Name: "Matcha Latte", Description: "Ceremonial-grade matcha whisked with steamed oat milk", Category: "Drinks", Price: 5.50},
+			{Name: "Iced Chai Latte", Description: "Spiced chai concentrate over ice with oat milk", Category: "Drinks", Price: 5.00},
+			{Name: "Earl Grey Tea", Description: "Fragrant black tea with bergamot, served in a pot", Category: "Drinks", Price: 3.50},
+			{Name: "Fresh Orange Juice", Description: "Cold-pressed Valencia oranges", Category: "Drinks", Price: 5.00},
+			// Food - Lunch
+			{Name: "Avocado Toast", Description: "Smashed avocado on sourdough with chili flakes, lime, and feta", Category: "Food", Price: 8.50},
+			{Name: "Chicken Pesto Wrap", Description: "Grilled chicken, basil pesto, sun-dried tomatoes, and arugula", Category: "Food", Price: 9.50},
+			{Name: "BLT Sandwich", Description: "Crispy bacon, lettuce, tomato, and garlic aioli on toasted ciabatta", Category: "Food", Price: 8.00},
+			{Name: "Caprese Panini", Description: "Fresh mozzarella, tomato, and basil pressed on focaccia", Category: "Food", Price: 8.50},
+			{Name: "Soup of the Day", Description: "Ask your barista what's simmering", Category: "Food", Price: 6.50},
+			// Pastries & Snacks
+			{Name: "Croissant", Description: "Buttery, flaky, and baked fresh every morning", Category: "Pastries", Price: 3.75},
+			{Name: "Cinnamon Roll", Description: "Warm, gooey, and generously iced", Category: "Pastries", Price: 4.25},
+			{Name: "Blueberry Muffin", Description: "Packed with wild blueberries and a crumble top", Category: "Pastries", Price: 3.75},
+			{Name: "Banana Bread", Description: "Moist, walnut-studded, sliced thick", Category: "Pastries", Price: 4.00},
 		}
 		db.Create(&items)
 		log.Println("Database seeded with sample menu items")
