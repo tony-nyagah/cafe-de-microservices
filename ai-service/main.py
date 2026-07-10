@@ -21,7 +21,8 @@ app.add_middleware(
 MENU_SERVICE_URL = os.getenv("MENU_SERVICE_URL", "http://localhost:8080")
 
 # Initialize the Mistral AI client with your API key
-mistral_client = Mistral(api_key=os.getenv("MISTRAL_API_KEY", ""))
+MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY", "")
+mistral_client = Mistral(api_key=MISTRAL_API_KEY) if MISTRAL_API_KEY else None
 
 
 async def get_menu_items():
@@ -45,6 +46,9 @@ class ChatRequest(BaseModel):
 @app.post("/api/chat")
 async def chat(request: ChatRequest):
     """Chat endpoint that uses menu data as context for AI responses."""
+    if mistral_client is None:
+        return {"reply": "MISTRAL_API_KEY not configured."}
+
     # Fetch live menu data from the Go Menu Service
     menu_items = await get_menu_items()
 
