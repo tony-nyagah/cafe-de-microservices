@@ -9,6 +9,22 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), vueDevTools(), tailwindcss()],
+  server: {
+    proxy: {
+      "/api/menu": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+      },
+      "/api/chat": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+      },
+      "/api/health": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
