@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from "vue-router";
 import MenuPanel from "../components/MenuPanel.vue";
 import ChatPanel from "../components/ChatPanel.vue";
 
-// Define the two routes for the app
 const routes = [
   { path: "/", redirect: "/menu" },
   { path: "/menu", component: MenuPanel },

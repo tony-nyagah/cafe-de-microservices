@@ -1,112 +1,52 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { useMenuStore } from "../stores/menuStore";
-
-const store = useMenuStore();
-
-// Form fields for creating a new menu item
-const name = ref("");
-const description = ref("");
-const category = ref("Coffee");
-const price = ref(0);
-
-onMounted(() => {
-  // Load menu items when the component first renders
-  store.fetchItems();
-});
-
-async function handleCreate() {
-  await store.createItem({
-    Name: name.value,
-    Description: description.value,
-    Category: category.value,
-    Price: price.value,
-    Available: true,
-  });
-  // Reset form fields after creating
-  name.value = "";
-  description.value = "";
-  price.value = 0;
-}
+const items = [
+  { name: "Espresso", description: "A bold, concentrated shot of pure coffee.", price: 3.5 },
+  {
+    name: "Cappuccino",
+    description: "Espresso with steamed milk and a crown of foam.",
+    price: 4.5,
+  },
+  { name: "Latte", description: "Smooth espresso with velvety steamed milk.", price: 4.75 },
+  { name: "Mocha", description: "Rich chocolate meets espresso and steamed milk.", price: 5.25 },
+  {
+    name: "Cold Brew",
+    description: "Slow-steeped for 18 hours. Smooth and naturally sweet.",
+    price: 4.25,
+  },
+  {
+    name: "Matcha Latte",
+    description: "Ceremonial-grade matcha whisked with steamed milk.",
+    price: 5.5,
+  },
+  {
+    name: "Chai Latte",
+    description: "Spiced black tea concentrate with steamed milk.",
+    price: 4.75,
+  },
+  { name: "Pour Over", description: "Single-origin beans, brewed to order.", price: 5.0 },
+  { name: "Croissant", description: "Buttery, flaky, and baked fresh daily.", price: 3.75 },
+];
 </script>
 
 <template>
-  <div class="p-6">
-    <h2 class="text-2xl font-bold mb-4">Menu Management</h2>
+  <div class="max-w-3xl mx-auto px-4 py-16">
+    <p class="text-sm font-medium uppercase tracking-widest text-primary/70 mb-4">Menu</p>
+    <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-10">What we're serving</h1>
 
-    <!-- New item form using DaisyUI form controls -->
-    <div class="card bg-base-200 p-4 mb-6">
-      <h3 class="text-lg font-semibold mb-2">Add New Item</h3>
-      <div class="flex flex-wrap gap-2">
-        <input
-          v-model="name"
-          type="text"
-          placeholder="Item name"
-          class="input input-bordered w-48"
-        />
-        <input
-          v-model="description"
-          type="text"
-          placeholder="Description"
-          class="input input-bordered w-48"
-        />
-        <select v-model="category" class="select select-bordered">
-          <option>Coffee</option>
-          <option>Tea</option>
-          <option>Pastry</option>
-          <option>Sandwich</option>
-        </select>
-        <input
-          v-model.number="price"
-          type="number"
-          step="0.01"
-          placeholder="Price"
-          class="input input-bordered w-24"
-        />
-        <button class="btn btn-primary" @click="handleCreate">Add</button>
+    <div class="space-y-1">
+      <div
+        v-for="item in items"
+        :key="item.name"
+        class="flex items-center justify-between py-4 border-b border-base-200 last:border-b-0"
+      >
+        <div>
+          <h3 class="font-semibold text-base-content">{{ item.name }}</h3>
+          <p class="text-sm text-base-content/50">{{ item.description }}</p>
+        </div>
+        <span class="text-base-content/70 font-medium tabular-nums"
+          >${{ item.price.toFixed(2) }}</span
+        >
       </div>
-    </div>
-
-    <!-- Loading spinner -->
-    <div v-if="store.loading" class="flex justify-center p-8">
-      <span class="loading loading-spinner loading-lg"></span>
-    </div>
-
-    <!-- Menu items table using DaisyUI table classes -->
-    <div v-else class="overflow-x-auto">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Available</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in store.items" :key="item.ID">
-            <td>
-              <div class="font-bold">{{ item.Name }}</div>
-              <div class="text-sm opacity-50">{{ item.Description }}</div>
-            </td>
-            <td>
-              <span class="badge badge-outline">{{ item.Category }}</span>
-            </td>
-            <td>${{ item.Price.toFixed(2) }}</td>
-            <td>
-              <span :class="item.Available ? 'badge badge-success' : 'badge badge-error'">
-                {{ item.Available ? "Yes" : "No" }}
-              </span>
-            </td>
-            <td>
-              <button class="btn btn-error btn-sm" @click="store.deleteItem(item.ID)">
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </template>

@@ -16,11 +16,11 @@ export default defineConfig({
         changeOrigin: true,
       },
       "/api/chat": {
-        target: "http://localhost:8000",
+        target: "http://localhost:8001",
         changeOrigin: true,
       },
       "/api/health": {
-        target: "http://localhost:8000",
+        target: "http://localhost:8001",
         changeOrigin: true,
       },
     },

@@ -3,21 +3,26 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <!-- DaisyUI navbar for switching between pages -->
-  <div class="navbar bg-base-100 shadow-sm">
-    <div class="flex-1">
-      <a class="btn btn-ghost text-xl">Cafe Manager</a>
+  <nav class="navbar bg-base-100 sticky top-0 z-10 border-b border-base-200">
+    <div class="navbar-start">
+      <RouterLink to="/menu" class="btn btn-ghost text-xl font-semibold tracking-tight">
+        <img
+          alt="The Good Café logo"
+          src="@/assets/logo.svg"
+          width="28"
+          height="28"
+          class="text-primary"
+        />
+        The Good Café
+      </RouterLink>
     </div>
-    <div class="flex-none">
-      <ul class="menu menu-horizontal px-1">
-        <li><RouterLink to="/menu">Menu</RouterLink></li>
-        <li><RouterLink to="/chat">Chat</RouterLink></li>
-      </ul>
+    <div class="navbar-end gap-1">
+      <RouterLink to="/menu" class="btn btn-ghost">Menu</RouterLink>
+      <RouterLink to="/chat" class="btn btn-ghost">Chat</RouterLink>
     </div>
-  </div>
+  </nav>
 
-  <!-- Route content renders here -->
-  <div class="container mx-auto" style="height: calc(100vh - 64px)">
+  <main>
     <RouterView />
-  </div>
+  </main>
 </template>

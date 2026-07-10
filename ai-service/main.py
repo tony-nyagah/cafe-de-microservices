@@ -69,7 +69,10 @@ async def chat(request: ChatRequest):
         "Here is the current menu:\n\n"
         f"{menu_context}\n\n"
         "Help customers with menu questions, recommendations, "
-        "and order totals. Be concise and warm."
+        "and order totals. Be concise and warm. "
+        "Do NOT use markdown formatting like **bold**, bullet points, "
+        "or numbered lists. Write in plain, natural sentences "
+        "like a real barista talking to a customer."
     )
 
     # Send the message to Mistral AI with menu context

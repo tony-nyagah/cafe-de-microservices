@@ -1,0 +1,36 @@
+services:
+  # Go Menu Service - handles menu CRUD operations
+  menu-service:
+    build: ./menu-service
+    ports:
+      - "8080:8080"
+    networks:
+      - cafe-network
+
+  # Python AI Service - powers the cafe assistant chatbot
+  ai-service:
+    build: ./ai-service
+    ports:
+      - "8001:8001"
+    environment:
+      - MISTRAL_API_KEY=UZr9iiaIZdYFF1tnyX7mR3oJVriMdCo7
+      - MENU_SERVICE_URL=http://menu-service:8080
+    depends_on:
+      - menu-service
+    networks:
+      - cafe-network
+
+  # Vue frontend - staff dashboard and customer chat UI
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - menu-service
+      - ai-service
+    networks:
+      - cafe-network
+
+networks:
+  cafe-network:
+    driver: bridge
